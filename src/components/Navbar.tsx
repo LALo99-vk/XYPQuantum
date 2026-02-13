@@ -37,9 +37,11 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center glow-border">
-            <span className="text-primary font-bold text-sm">X</span>
-          </div>
+          <img 
+            src="/logos/Logo1.png" 
+            alt="XYP Quantum AI" 
+            className="h-8 md:h-10 w-auto rounded-full border-2 border-primary/30 transition-opacity group-hover:opacity-80"
+          />
           <span className="text-foreground font-bold text-lg tracking-tight">
             XYP<span className="text-primary"> Quantum AI</span>
           </span>

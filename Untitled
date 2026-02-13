@@ -1,0 +1,65 @@
+Design a premium futuristic deep-tech startup website using the following strict color system.
+
+Color System
+
+Primary: Deep black background
+
+Brand Color: Electric blue
+
+Accent Color: Teal / emerald green (for highlights and interactions)
+
+Text: White for readability
+
+Color Usage Rules
+
+Black should dominate the layout (70% usage)
+
+Electric blue used for branding, gradients, glow effects, headings, borders, and active elements
+
+Teal / emerald green used as accent for CTAs, highlights, hover states, success states, and important interactions
+
+White used for text and contrast
+
+Avoid random colors — only use black, blue, teal/emerald, and white
+
+Example Color Values
+
+Black: #000000 / #0A0A0A
+
+Electric Blue: #2563EB or #3B82F6
+
+Teal: #14B8A6
+
+Emerald: #10B981
+
+White: #FFFFFF
+
+Visual Style
+
+futuristic and premium
+
+minimal and bold
+
+deep-tech / AI research aesthetic
+
+high contrast
+
+glowing UI elements
+
+clean spacing and strong typography
+
+Design Implementation
+
+dark black background with subtle blue gradient lighting
+
+glowing electric blue borders and highlights
+
+teal/emerald accent buttons and hover feedback
+
+glassmorphism surfaces with soft blue glow
+
+modern sans-serif typography (Inter or SF Pro style)
+
+large hero text and minimal body content
+
+The website should feel cinematic, intelligent, and technology-focused — like an advanced AI platform or research company.

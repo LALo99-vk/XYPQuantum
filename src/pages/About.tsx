@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Target, Eye, Lightbulb, Shield, Globe, Rocket } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import GlowOrb from "@/components/GlowOrb";
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 const values = [
   { icon: Lightbulb, title: "Innovation with Responsibility", desc: "Pushing boundaries while staying grounded in ethics" },
@@ -14,39 +15,39 @@ const values = [
 const team = [
   {
     name: "Arjun Mehta",
-    role: "Founder & CEO",
-    desc: "Deep tech visionary with 10+ years in AI systems and quantum computing research.",
-    initials: "AM",
+    designation: "Founder & CEO",
+    quote: "Deep tech visionary with 10+ years in AI systems and quantum computing research. Passionate about building intelligent infrastructure that transforms how institutions operate.",
+    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     name: "Priya Sharma",
-    role: "CTO",
-    desc: "Full-stack AI architect specializing in edge computing and perception systems.",
-    initials: "PS",
+    designation: "CTO",
+    quote: "Full-stack AI architect specializing in edge computing and perception systems. Leads the technical vision behind XYP's intelligent platform stack.",
+    src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     name: "Rohan Kapoor",
-    role: "Head of Product",
-    desc: "Ed-tech innovator focused on building scalable institutional platforms.",
-    initials: "RK",
+    designation: "Head of Product",
+    quote: "Ed-tech innovator focused on building scalable institutional platforms. Drives ZYLOENS and our education-first product philosophy.",
+    src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     name: "Anika Das",
-    role: "Lead AI Researcher",
-    desc: "PhD in ML with expertise in computer vision and NLP applications.",
-    initials: "AD",
+    designation: "Lead AI Researcher",
+    quote: "PhD in ML with expertise in computer vision and NLP applications. Pushes the boundaries of perception AI and real-world model deployment.",
+    src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     name: "Vikram Singh",
-    role: "Head of Engineering",
-    desc: "Infrastructure expert building cloud-native, edge-ready systems at scale.",
-    initials: "VS",
+    designation: "Head of Engineering",
+    quote: "Infrastructure expert building cloud-native, edge-ready systems at scale. Ensures every XYP product is robust, secure, and performant.",
+    src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     name: "Neha Patel",
-    role: "Head of Design",
-    desc: "UX strategist creating intuitive interfaces for complex AI systems.",
-    initials: "NP",
+    designation: "Head of Design",
+    quote: "UX strategist creating intuitive interfaces for complex AI systems. Believes that deep technology should feel effortless to use.",
+    src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
 ];
 
@@ -71,7 +72,7 @@ const About = () => {
             transition={{ delay: 0.15 }}
             className="text-4xl md:text-6xl font-bold mb-6"
           >
-            Deep Tech, <span className="gradient-text">Deep Purpose</span>
+            <span className="gradient-text">Xaggerate Your Potential</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -145,30 +146,16 @@ const About = () => {
       <section className="relative section-padding">
         <GlowOrb className="bottom-0 right-1/4" size={500} />
         <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
+          <AnimatedSection className="text-center mb-4">
             <p className="text-primary text-sm font-semibold tracking-[0.15em] uppercase mb-4">The Team</p>
             <h2 className="text-3xl md:text-5xl font-bold">
               Minds Behind the <span className="gradient-text">Mission</span>
             </h2>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {team.map((member, i) => (
-              <AnimatedSection key={member.name} delay={i * 0.08}>
-                <motion.div
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  className="p-8 rounded-2xl glow-border bg-card/50 hover:bg-card transition-all h-full text-center group"
-                >
-                  <div className="w-20 h-20 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center mx-auto mb-5 group-hover:bg-primary/20 transition-colors">
-                    <span className="text-primary font-bold text-xl">{member.initials}</span>
-                  </div>
-                  <h3 className="text-foreground font-bold text-lg">{member.name}</h3>
-                  <p className="text-primary text-sm font-medium mb-3">{member.role}</p>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{member.desc}</p>
-                </motion.div>
-              </AnimatedSection>
-            ))}
-          </div>
+          <AnimatedSection delay={0.15}>
+            <AnimatedTestimonials testimonials={team} autoplay />
+          </AnimatedSection>
         </div>
       </section>
     </div>

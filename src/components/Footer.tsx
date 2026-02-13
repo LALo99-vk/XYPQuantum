@@ -7,12 +7,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center glow-border">
-                <span className="text-primary font-bold text-sm">X</span>
-              </div>
-              <span className="text-foreground font-bold text-lg">
-                XYP<span className="text-primary"> Quantum AI</span>
-              </span>
+              <img 
+                src="/logos/Logo1.png" 
+                alt="XYP Quantum AI" 
+                className="h-10 w-auto"
+              />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Building intelligent systems for education, smart cities & the future of quantum AI.

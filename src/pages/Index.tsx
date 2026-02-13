@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
 import GlowOrb from "@/components/GlowOrb";
 import ParticleField from "@/components/ParticleField";
+import AnimatedShaderBackground from "@/components/ui/animated-shader-background";
 
 const domains = [
   { icon: Brain, title: "Artificial Intelligence & Machine Learning", desc: "Deep learning systems for real-world decision making" },
@@ -29,6 +30,7 @@ const Index = () => {
     <div className="relative overflow-hidden">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center section-padding pt-32">
+        <AnimatedShaderBackground />
         <GlowOrb className="top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2" size={600} />
         <GlowOrb className="bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2" size={500} delay={0.5} />
         <ParticleField />
@@ -115,34 +117,35 @@ const Index = () => {
 
       {/* Core Domains */}
       <section className="relative section-padding">
-        <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
-            <p className="text-primary text-sm font-semibold tracking-[0.15em] uppercase mb-4">Core Domains</p>
-            <h2 className="text-3xl md:text-5xl font-bold">
-              Where Intelligence <span className="gradient-text">Meets Reality</span>
-            </h2>
+        <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16">
+          <AnimatedSection>
+            <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center md:space-y-12">
+              <p className="text-primary text-sm font-semibold tracking-[0.15em] uppercase">Core Domains</p>
+              <h2 className="text-balance text-3xl md:text-5xl font-bold">
+                Where Intelligence <span className="gradient-text">Meets Reality</span>
+              </h2>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                We operate across six foundational domains — building real-world systems that span institutions, infrastructure, and frontier research.
+              </p>
+            </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {domains.map((domain, i) => (
-              <AnimatedSection key={domain.title} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                  className="group relative p-8 rounded-2xl glow-border bg-card/50 hover:bg-card transition-all duration-500 cursor-pointer h-full"
+          <AnimatedSection delay={0.15}>
+            <div className="relative mx-auto grid max-w-2xl lg:max-w-4xl divide-x divide-y divide-border border border-border rounded-2xl overflow-hidden sm:grid-cols-2 lg:grid-cols-3">
+              {domains.map((domain) => (
+                <div
+                  key={domain.title}
+                  className="group space-y-3 p-8 md:p-10 transition-all duration-300 hover:bg-primary/5 cursor-pointer"
                 >
-                  <div className="absolute inset-0 rounded-2xl gradient-radial opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="relative z-10">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
-                      <domain.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="text-foreground font-semibold text-lg mb-3">{domain.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{domain.desc}</p>
+                  <div className="flex items-center gap-3">
+                    <domain.icon className="w-5 h-5 text-primary transition-colors group-hover:text-[#14B8A6]" />
+                    <h3 className="text-foreground text-sm font-semibold">{domain.title}</h3>
                   </div>
-                </motion.div>
-              </AnimatedSection>
-            ))}
-          </div>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{domain.desc}</p>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 

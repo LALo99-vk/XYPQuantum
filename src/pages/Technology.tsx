@@ -2,13 +2,15 @@ import { motion } from "framer-motion";
 import { Brain, Eye, Building2, Factory, Atom, Server, Shield, Cloud, Code, Cpu, Radio, Lock } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import GlowOrb from "@/components/GlowOrb";
+import { GridPatternCard, GridPatternCardBody } from "@/components/ui/card-with-grid-ellipsis-pattern";
+import { FeatureCard } from "@/components/ui/grid-feature-cards";
 
 const solutions = [
-  { icon: Brain, title: "AI for Schools & Institutions", desc: "Intelligent systems for modern education" },
-  { icon: Eye, title: "Real-Time Perception AI", desc: "Visual intelligence for autonomous decision-making" },
-  { icon: Building2, title: "Smart City Intelligence", desc: "Urban infrastructure optimization" },
-  { icon: Factory, title: "Industrial Automation AI", desc: "Manufacturing and process intelligence" },
-  { icon: Atom, title: "Quantum Computing Research", desc: "Next-gen computational paradigms" },
+  { icon: Brain, title: "AI for Schools & Institutions", description: "Intelligent systems for modern education" },
+  { icon: Eye, title: "Real-Time Perception AI", description: "Visual intelligence for autonomous decision-making" },
+  { icon: Building2, title: "Smart City Intelligence", description: "Urban infrastructure optimization" },
+  { icon: Factory, title: "Industrial Automation AI", description: "Manufacturing and process intelligence" },
+  { icon: Atom, title: "Quantum Computing Research", description: "Next-gen computational paradigms" },
 ];
 
 const techStack = [
@@ -66,30 +68,39 @@ const Technology = () => {
       </section>
 
       {/* Solutions */}
-      <section className="relative section-padding">
-        <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold">
+      <section className="relative section-padding py-16 md:py-32">
+        <div className="mx-auto w-full max-w-7xl space-y-8 px-4">
+          <AnimatedSection className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-bold tracking-wide text-balance md:text-4xl lg:text-5xl">
               Solutions Across <span className="gradient-text">Institutions & Industry</span>
             </h2>
+            <p className="text-muted-foreground mt-4 text-sm tracking-wide text-balance md:text-base">
+              Deep technology solutions powering real-world systems across education, infrastructure, and frontier research.
+            </p>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {solutions.map((s, i) => (
-              <AnimatedSection key={s.title} delay={i * 0.08}>
-                <motion.div
-                  whileHover={{ y: -4, scale: 1.02 }}
-                  className="p-8 rounded-2xl glow-border bg-card/50 hover:bg-card transition-all h-full group"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
-                    <s.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-foreground font-semibold text-lg mb-2">{s.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
-                </motion.div>
-              </AnimatedSection>
-            ))}
-          </div>
+          <AnimatedSection
+            delay={0.2}
+            className="grid grid-cols-1 divide-x divide-y divide-border border border-border rounded-2xl overflow-hidden sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {solutions.map((feature, index) => {
+              // On lg (3-col): items 1-3 in row 1, item 4 (1 col) + item 5 (2 cols) in row 2
+              // On sm (2-col): items 1-2, 3-4, item 5 spans full width
+              let colSpanClass = '';
+              if (index === solutions.length - 1) {
+                // Last item (5th): spans full width on sm, spans 2 cols on lg
+                colSpanClass = 'sm:col-span-2 lg:col-span-2';
+              }
+              
+              return (
+                <FeatureCard 
+                  key={feature.title} 
+                  feature={feature} 
+                  className={`bg-card/30 hover:bg-card/50 transition-colors ${colSpanClass}`}
+                />
+              );
+            })}
+          </AnimatedSection>
         </div>
       </section>
 
@@ -130,18 +141,19 @@ const Technology = () => {
             </h2>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {partnerships.map((p, i) => (
-              <AnimatedSection key={p} delay={i * 0.08}>
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  className="p-6 rounded-xl border border-border hover:glow-border bg-card/30 hover:bg-card/50 transition-all text-center"
-                >
-                  <p className="text-foreground font-medium">{p}</p>
-                </motion.div>
-              </AnimatedSection>
-            ))}
-          </div>
+          <AnimatedSection delay={0.2}>
+            <GridPatternCard className="border-border bg-card/30 hover:bg-card/50 hover:border-primary/30 transition-all">
+              <GridPatternCardBody>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {partnerships.map((p, i) => (
+                    <div key={p} className="text-center">
+                      <p className="text-foreground font-medium text-base">{p}</p>
+                    </div>
+                  ))}
+                </div>
+              </GridPatternCardBody>
+            </GridPatternCard>
+          </AnimatedSection>
         </div>
       </section>
     </div>
