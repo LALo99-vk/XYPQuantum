@@ -1,13 +1,28 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronRight, Zap, Smartphone } from "lucide-react";
+import { ArrowRight, Brain, Eye, Cpu, Building2, Factory, Atom, ChevronRight, GraduationCap, Zap, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AnimatedSection from "@/components/AnimatedSection";
 import GlowOrb from "@/components/GlowOrb";
 import ParticleField from "@/components/ParticleField";
-import BentoDomains from "@/components/BentoDomains";
-import HorizontalPartners from "@/components/HorizontalPartners";
 
+const domains = [
+  { icon: Brain, title: "Artificial Intelligence & Machine Learning", desc: "Deep learning systems for real-world decision making" },
+  { icon: Eye, title: "Computer Vision & Perception AI", desc: "Visual intelligence for autonomous understanding" },
+  { icon: Cpu, title: "IoT & Smart Devices", desc: "Connected intelligence across physical environments" },
+  { icon: Building2, title: "Smart Cities & Automation", desc: "Urban intelligence and infrastructure systems" },
+  { icon: Factory, title: "Industrial Intelligence", desc: "Manufacturing optimization through AI" },
+  { icon: Atom, title: "Quantum Computing Research", desc: "Next-generation computational paradigms" },
+];
+
+const partners = [
+  "Schools & Educational Institutions",
+  "Government & Innovation Programs",
+  "Industry & IoT Partners",
+  "Embedded & Hardware Teams",
+  "Research & Academic Communities",
+  "Startups & Product Teams",
+];
 
 const Index = () => {
   return (
@@ -98,8 +113,38 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Core Domains — Bento Grid */}
-      <BentoDomains />
+      {/* Core Domains */}
+      <section className="relative section-padding">
+        <div className="max-w-7xl mx-auto">
+          <AnimatedSection className="text-center mb-16">
+            <p className="text-primary text-sm font-semibold tracking-[0.15em] uppercase mb-4">Core Domains</p>
+            <h2 className="text-3xl md:text-5xl font-bold">
+              Where Intelligence <span className="gradient-text">Meets Reality</span>
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {domains.map((domain, i) => (
+              <AnimatedSection key={domain.title} delay={i * 0.1}>
+                <motion.div
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                  className="group relative p-8 rounded-2xl glow-border bg-card/50 hover:bg-card transition-all duration-500 cursor-pointer h-full"
+                >
+                  <div className="absolute inset-0 rounded-2xl gradient-radial opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="relative z-10">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
+                      <domain.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h3 className="text-foreground font-semibold text-lg mb-3">{domain.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{domain.desc}</p>
+                  </div>
+                </motion.div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ZYLOENS Product Preview */}
       <section className="relative section-padding overflow-hidden">
@@ -189,8 +234,31 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Partnership — Horizontal Scroll */}
-      <HorizontalPartners />
+      {/* Partnership Section */}
+      <section className="relative section-padding">
+        <GlowOrb className="bottom-0 left-1/2 -translate-x-1/2" size={600} />
+        <div className="max-w-7xl mx-auto">
+          <AnimatedSection className="text-center mb-16">
+            <p className="text-primary text-sm font-semibold tracking-[0.15em] uppercase mb-4">Partnerships</p>
+            <h2 className="text-3xl md:text-5xl font-bold">
+              Built for <span className="gradient-text">Collaboration</span>
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {partners.map((partner, i) => (
+              <AnimatedSection key={partner} delay={i * 0.08}>
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  className="p-6 rounded-xl border border-border hover:glow-border bg-card/30 hover:bg-card/50 transition-all duration-300 text-center"
+                >
+                  <p className="text-foreground font-medium">{partner}</p>
+                </motion.div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Final CTA */}
       <section className="relative section-padding">
