@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import { google } from "googleapis";
 import dotenv from "dotenv";
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -11,7 +11,8 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const isProduction = process.env.NODE_ENV === "production";
+const distPath = path.join(__dirname, "..", "dist");
+const hasFrontendBuild = existsSync(path.join(distPath, "index.html"));
 
 // Middleware
 app.use(cors());
@@ -125,9 +126,8 @@ app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
-// ---------- Serve frontend (single service on Render) ----------
-if (isProduction) {
-  const distPath = path.join(__dirname, "..", "dist");
+// ---------- Serve frontend when dist exists (e.g. on Render) ----------
+if (hasFrontendBuild) {
   app.use(express.static(distPath));
   app.get("*", (_req, res) => {
     res.sendFile(path.join(distPath, "index.html"));
