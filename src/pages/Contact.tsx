@@ -1,12 +1,21 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, ArrowRight, MessageSquare, Handshake, CalendarCheck, MapPin } from "lucide-react";
+import { Mail, ArrowRight, MessageSquare, Handshake, CalendarCheck, MapPin, Phone, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import AnimatedSection from "@/components/AnimatedSection";
 import GlowOrb from "@/components/GlowOrb";
 import { useToast } from "@/hooks/use-toast";
+
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 const contactOptions = [
   { icon: CalendarCheck, title: "Book a Demo", desc: "See ZYLOENS or our AI platforms in action" },
@@ -14,18 +23,59 @@ const contactOptions = [
   { icon: MessageSquare, title: "General Inquiry", desc: "Questions, feedback, or just say hello" },
 ];
 
+const subjectOptions = [
+  "Book a Demo",
+  "Book a Service",
+  "I'm a potential client",
+  "Partnership / Collaboration",
+  "General inquiry",
+];
+
 const Contact = () => {
   const { toast } = useToast();
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       toast({ title: "Please fill in all required fields", variant: "destructive" });
       return;
     }
-    toast({ title: "Message sent!", description: "We'll get back to you soon." });
-    setForm({ name: "", email: "", subject: "", message: "" });
+
+    setSending(true);
+
+    try {
+      const res = await fetch(`${API_URL}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          subject: form.subject,
+          message: form.message,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+
+      toast({ title: "Message sent!", description: "We'll get back to you soon." });
+      setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch (error) {
+      toast({
+        title: "Failed to send message",
+        description: error instanceof Error ? error.message : "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -88,6 +138,7 @@ const Contact = () => {
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     className="bg-card/50 border-border focus:border-primary h-12"
                     maxLength={100}
+                    disabled={sending}
                   />
                   <Input
                     type="email"
@@ -96,24 +147,55 @@ const Contact = () => {
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     className="bg-card/50 border-border focus:border-primary h-12"
                     maxLength={255}
+                    disabled={sending}
                   />
                 </div>
-                <Input
-                  placeholder="Subject"
-                  value={form.subject}
-                  onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                  className="bg-card/50 border-border focus:border-primary h-12"
-                  maxLength={200}
-                />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <Input
+                    type="tel"
+                    placeholder="Phone Number"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    className="bg-card/50 border-border focus:border-primary h-12"
+                    maxLength={20}
+                    disabled={sending}
+                  />
+                  <Select
+                    value={form.subject || undefined}
+                    onValueChange={(v) => setForm({ ...form, subject: v })}
+                    disabled={sending}
+                  >
+                    <SelectTrigger className="h-12 bg-card/50 border-border focus:border-primary">
+                      <SelectValue placeholder="Subject" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {subjectOptions.map((opt) => (
+                        <SelectItem key={opt} value={opt}>
+                          {opt}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
                 <Textarea
                   placeholder="Your Message *"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   className="bg-card/50 border-border focus:border-primary min-h-[150px] resize-none"
                   maxLength={1000}
+                  disabled={sending}
                 />
-                <Button variant="hero" size="lg" type="submit" className="w-full sm:w-auto">
-                  Send Message <ArrowRight className="ml-1 w-4 h-4" />
+                <Button variant="hero" size="lg" type="submit" className="w-full sm:w-auto" disabled={sending}>
+                  {sending ? (
+                    <>
+                      <Loader2 className="mr-2 w-4 h-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message <ArrowRight className="ml-1 w-4 h-4" />
+                    </>
+                  )}
                 </Button>
               </form>
             </AnimatedSection>
@@ -128,6 +210,16 @@ const Contact = () => {
                   <div>
                     <h4 className="text-foreground font-semibold mb-1">Email</h4>
                     <p className="text-muted-foreground text-sm">info@xypquantum.com</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="text-foreground font-semibold mb-1">Phone</h4>
+                    <p className="text-muted-foreground text-sm">Available on request</p>
                   </div>
                 </div>
 
