@@ -132,9 +132,12 @@ if (hasFrontendBuild) {
   app.get("*", (_req, res) => {
     res.sendFile(path.join(distPath, "index.html"));
   });
+  console.log("Serving frontend from", distPath);
+} else {
+  console.log("No frontend build found at", distPath, "(dist/index.html missing)");
 }
 
 // ---------- Start ----------
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log("Server listening on port", PORT);
 });
