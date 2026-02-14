@@ -17,7 +17,7 @@ const AnimatedShaderBackground = ({ className = '' }: AnimatedShaderBackgroundPr
 
     // Performance: no antialias, low pixel ratio, render at half res
     const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true, powerPreference: 'low-power' });
-    const scale = 0.5; // render at half resolution
+    const scale = 0.4; // render at reduced resolution for performance
     renderer.setSize(container.clientWidth * scale, container.clientHeight * scale);
     renderer.setPixelRatio(1);
     renderer.domElement.style.width = '100%';
@@ -86,7 +86,7 @@ const AnimatedShaderBackground = ({ className = '' }: AnimatedShaderBackgroundPr
 
     let frameId: number;
     let lastTime = 0;
-    const targetInterval = 1000 / 30; // cap at 30fps
+    const targetInterval = 1000 / 24; // cap at 24fps for performance
 
     const animate = (now: number) => {
       frameId = requestAnimationFrame(animate);

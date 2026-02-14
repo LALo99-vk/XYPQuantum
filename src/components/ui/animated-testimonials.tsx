@@ -124,30 +124,17 @@ export const AnimatedTestimonials = ({
             <p className="text-sm text-primary font-medium">
               {testimonials[active].designation}
             </p>
-            <motion.p className="text-lg text-muted-foreground mt-8">
-              {testimonials[active].quote.split(" ").map((word, index) => (
-                <motion.span
-                  key={index}
-                  initial={{
-                    filter: "blur(10px)",
-                    opacity: 0,
-                    y: 5,
-                  }}
-                  animate={{
-                    filter: "blur(0px)",
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  transition={{
-                    duration: 0.3,
-                    ease: [0.25, 0.46, 0.45, 0.94],
-                    delay: 0.015 * index,
-                  }}
-                  className="inline-block"
-                >
-                  {word}&nbsp;
-                </motion.span>
-              ))}
+            <motion.p
+              className="text-lg text-muted-foreground mt-8"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.5,
+                delay: 0.15,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
+            >
+              {testimonials[active].quote}
             </motion.p>
           </motion.div>
           <div className="flex gap-4 pt-12 md:pt-0">

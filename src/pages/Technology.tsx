@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Brain, Eye, Building2, Factory, Atom, Server, Shield, Cloud, Code, Cpu, Radio, Lock } from "lucide-react";
+import { Brain, Eye, Building2, Factory, Atom, Shield, Cloud, Code, Cpu, Radio } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import GlowOrb from "@/components/GlowOrb";
 import { GridPatternCard, GridPatternCardBody } from "@/components/ui/card-with-grid-ellipsis-pattern";
@@ -118,13 +118,10 @@ const Technology = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {techStack.map((t, i) => (
               <AnimatedSection key={t.label} delay={i * 0.06}>
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  className="flex items-center gap-4 p-5 rounded-xl border border-border hover:glow-border bg-card/30 hover:bg-card/50 transition-all"
-                >
+                <div className="flex items-center gap-4 p-5 rounded-xl border border-border hover:border-primary/30 bg-card/30 hover:bg-card/50 transition-all duration-300">
                   <t.icon className="w-5 h-5 text-primary flex-shrink-0" />
                   <span className="text-foreground text-sm font-medium">{t.label}</span>
-                </motion.div>
+                </div>
               </AnimatedSection>
             ))}
           </div>

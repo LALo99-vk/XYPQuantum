@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils'
-import { motion } from "framer-motion"
 
 interface GridPatternCardProps {
   children: React.ReactNode
@@ -15,7 +14,7 @@ export function GridPatternCard({
   gradientClassName
 }: GridPatternCardProps) {
   return (
-    <motion.div
+    <div
       className={cn(
         "border w-full rounded-md overflow-hidden",
         "bg-background",
@@ -23,9 +22,6 @@ export function GridPatternCard({
         "p-3",
         className
       )}
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <div className={cn(
         "size-full bg-repeat bg-[length:30px_30px]",
@@ -40,7 +36,7 @@ export function GridPatternCard({
           {children}
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 

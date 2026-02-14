@@ -9,11 +9,11 @@ interface AnimatedSectionProps {
 }
 
 const directionMap = {
-  up: { y: 60, x: 0 },
-  down: { y: -60, x: 0 },
-  left: { x: 60, y: 0 },
-  right: { x: -60, y: 0 },
-  none: { x: 0, y: 0 },
+  up: { y: 30 },
+  down: { y: -30 },
+  left: { x: 30 },
+  right: { x: -30 },
+  none: {},
 };
 
 const AnimatedSection = ({
@@ -23,23 +23,19 @@ const AnimatedSection = ({
   direction = "up",
 }: AnimatedSectionProps) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const initial = {
-    opacity: 0,
-    ...directionMap[direction],
-  };
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <motion.div
       ref={ref}
-      initial={initial}
-      animate={isInView ? { opacity: 1, x: 0, y: 0 } : initial}
+      initial={{ opacity: 0, ...directionMap[direction] }}
+      animate={isInView ? { opacity: 1, x: 0, y: 0 } : undefined}
       transition={{
-        duration: 0.8,
+        duration: 0.5,
         delay,
         ease: [0.25, 0.4, 0.25, 1],
       }}
+      style={{ willChange: "opacity, transform" }}
       className={className}
     >
       {children}

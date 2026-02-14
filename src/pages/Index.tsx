@@ -16,15 +16,6 @@ const domains = [
   { icon: Atom, title: "Quantum Computing Research", desc: "Next-generation computational paradigms" },
 ];
 
-const partners = [
-  "Schools & Educational Institutions",
-  "Government & Innovation Programs",
-  "Industry & IoT Partners",
-  "Embedded & Hardware Teams",
-  "Research & Academic Communities",
-  "Startups & Product Teams",
-];
-
 const Index = () => {
   return (
     <div className="relative overflow-hidden">
@@ -117,7 +108,7 @@ const Index = () => {
 
       {/* Core Domains */}
       <section className="relative section-padding">
-        <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16">
+        <div className="mx-auto max-w-6xl space-y-8 px-6 md:space-y-16">
           <AnimatedSection>
             <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center md:space-y-12">
               <p className="text-primary text-sm font-semibold tracking-[0.15em] uppercase">Core Domains</p>
@@ -131,11 +122,11 @@ const Index = () => {
           </AnimatedSection>
 
           <AnimatedSection delay={0.15}>
-            <div className="relative mx-auto grid max-w-2xl lg:max-w-4xl divide-x divide-y divide-border border border-border rounded-2xl overflow-hidden sm:grid-cols-2 lg:grid-cols-3">
+            <div className="relative mx-auto grid max-w-4xl lg:max-w-6xl divide-x divide-y divide-border border border-border rounded-2xl overflow-hidden sm:grid-cols-2 lg:grid-cols-3">
               {domains.map((domain) => (
                 <div
                   key={domain.title}
-                  className="group space-y-3 p-8 md:p-10 transition-all duration-300 hover:bg-primary/5 cursor-pointer"
+                  className="group space-y-3 p-10 md:p-12 transition-all duration-300 hover:bg-primary/5 cursor-pointer"
                 >
                   <div className="flex items-center gap-3">
                     <domain.icon className="w-5 h-5 text-primary transition-colors group-hover:text-[#14B8A6]" />
@@ -176,18 +167,14 @@ const Index = () => {
               <div className="relative">
                 <div className="aspect-square rounded-3xl glow-border bg-gradient-to-br from-primary/10 to-transparent p-8 flex items-center justify-center">
                   <div className="space-y-4 w-full">
-                    {["Student Portfolio", "Teacher Workflows", "Admin Dashboard", "Growth Analytics"].map((item, i) => (
-                      <motion.div
+                    {["Student Portfolio", "Teacher Workflows", "Admin Dashboard", "Growth Analytics"].map((item) => (
+                      <div
                         key={item}
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 + i * 0.1 }}
                         className="flex items-center gap-4 p-4 rounded-xl bg-card/50 glow-border"
                       >
                         <div className="w-3 h-3 rounded-full bg-primary animate-glow-pulse" />
                         <span className="text-foreground font-medium">{item}</span>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -209,56 +196,24 @@ const Index = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <AnimatedSection delay={0.1}>
-              <motion.div
-                whileHover={{ y: -5 }}
-                className="p-8 rounded-2xl glow-border bg-card/50 hover:bg-card transition-all h-full"
-              >
+              <div className="p-8 rounded-2xl glow-border bg-card/50 hover:bg-card hover:-translate-y-1 transition-all duration-300 h-full">
                 <Zap className="w-10 h-10 text-primary mb-5" />
                 <h3 className="text-2xl font-bold text-foreground mb-3">XYP Edge Intelligence</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Real-time AI inference on edge devices. Sensor data pipelines, embedded AI deployments, and hardware-friendly perception AI.
                 </p>
-              </motion.div>
+              </div>
             </AnimatedSection>
 
             <AnimatedSection delay={0.2}>
-              <motion.div
-                whileHover={{ y: -5 }}
-                className="p-8 rounded-2xl glow-border bg-card/50 hover:bg-card transition-all h-full"
-              >
+              <div className="p-8 rounded-2xl glow-border bg-card/50 hover:bg-card hover:-translate-y-1 transition-all duration-300 h-full">
                 <Smartphone className="w-10 h-10 text-primary mb-5" />
                 <h3 className="text-2xl font-bold text-foreground mb-3">XYP Smart Devices</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Gesture-controlled smart appliances, sensor-driven automation, and intelligent environments for homes, classrooms, and offices.
                 </p>
-              </motion.div>
+              </div>
             </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* Partnership Section */}
-      <section className="relative section-padding">
-        <GlowOrb className="bottom-0 left-1/2 -translate-x-1/2" size={600} />
-        <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
-            <p className="text-primary text-sm font-semibold tracking-[0.15em] uppercase mb-4">Partnerships</p>
-            <h2 className="text-3xl md:text-5xl font-bold">
-              Built for <span className="gradient-text">Collaboration</span>
-            </h2>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {partners.map((partner, i) => (
-              <AnimatedSection key={partner} delay={i * 0.08}>
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  className="p-6 rounded-xl border border-border hover:glow-border bg-card/30 hover:bg-card/50 transition-all duration-300 text-center"
-                >
-                  <p className="text-foreground font-medium">{partner}</p>
-                </motion.div>
-              </AnimatedSection>
-            ))}
           </div>
         </div>
       </section>

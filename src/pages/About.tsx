@@ -128,14 +128,11 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {values.map((v, i) => (
               <AnimatedSection key={v.title} delay={i * 0.08}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="p-7 rounded-2xl border border-border hover:glow-border bg-card/30 hover:bg-card/50 transition-all h-full"
-                >
+                <div className="p-7 rounded-2xl border border-border hover:border-primary/30 bg-card/30 hover:bg-card/50 hover:-translate-y-1 transition-all duration-300 h-full">
                   <v.icon className="w-8 h-8 text-primary mb-4" />
                   <h3 className="text-foreground font-semibold text-lg mb-2">{v.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{v.desc}</p>
-                </motion.div>
+                </div>
               </AnimatedSection>
             ))}
           </div>

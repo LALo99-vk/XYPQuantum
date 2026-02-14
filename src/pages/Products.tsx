@@ -84,14 +84,11 @@ const Products = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {zyloensFeatures.map((feature, i) => (
               <AnimatedSection key={feature.title} delay={i * 0.08}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="p-7 rounded-2xl glow-border bg-card/50 hover:bg-card transition-all h-full"
-                >
+                <div className="p-7 rounded-2xl glow-border bg-card/50 hover:bg-card hover:-translate-y-1 transition-all duration-300 h-full">
                   <feature.icon className="w-8 h-8 text-primary mb-4" />
                   <h3 className="text-foreground font-semibold text-lg mb-2">{feature.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{feature.desc}</p>
-                </motion.div>
+                </div>
               </AnimatedSection>
             ))}
           </div>
@@ -120,18 +117,11 @@ const Products = () => {
                 Deploy AI at the edge — real-time inference, sensor pipelines, and perception AI on embedded hardware.
               </p>
               <div className="space-y-3">
-                {edgeFeatures.map((f, i) => (
-                  <motion.div
-                    key={f}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.08 }}
-                    className="flex items-center gap-3"
-                  >
+                {edgeFeatures.map((f) => (
+                  <div key={f} className="flex items-center gap-3">
                     <Zap className="w-4 h-4 text-primary flex-shrink-0" />
                     <span className="text-foreground text-sm">{f}</span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </AnimatedSection>
@@ -175,18 +165,11 @@ const Products = () => {
                 Gesture-controlled appliances, sensor-driven automation, and scalable IoT for intelligent environments.
               </p>
               <div className="space-y-3">
-                {smartFeatures.map((f, i) => (
-                  <motion.div
-                    key={f}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.08 }}
-                    className="flex items-center gap-3"
-                  >
+                {smartFeatures.map((f) => (
+                  <div key={f} className="flex items-center gap-3">
                     <Smartphone className="w-4 h-4 text-primary flex-shrink-0" />
                     <span className="text-foreground text-sm">{f}</span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </AnimatedSection>

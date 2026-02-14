@@ -39,7 +39,8 @@ const Footer = () => {
           <div>
             <h4 className="text-foreground font-semibold text-sm mb-4">Connect</h4>
             <div className="flex flex-col gap-2">
-              <span className="text-muted-foreground text-sm">hello@xypquantumai.com</span>
+              <span className="text-muted-foreground text-sm">info@xypquantum.com</span>
+              <span className="text-muted-foreground text-sm">Bengaluru, Karnataka, India</span>
               <Link to="/contact" className="text-muted-foreground text-sm hover:text-primary transition-colors">Book a Demo</Link>
               <Link to="/contact" className="text-muted-foreground text-sm hover:text-primary transition-colors">Partner With Us</Link>
             </div>

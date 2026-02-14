@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, ArrowRight, MessageSquare, Handshake, CalendarCheck } from "lucide-react";
+import { Mail, ArrowRight, MessageSquare, Handshake, CalendarCheck, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -67,14 +67,11 @@ const Contact = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
             {contactOptions.map((opt, i) => (
               <AnimatedSection key={opt.title} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="p-7 rounded-2xl glow-border bg-card/50 hover:bg-card transition-all text-center h-full"
-                >
+                <div className="p-7 rounded-2xl glow-border bg-card/50 hover:bg-card hover:-translate-y-1 transition-all duration-300 text-center h-full">
                   <opt.icon className="w-8 h-8 text-primary mx-auto mb-4" />
                   <h3 className="text-foreground font-semibold text-lg mb-2">{opt.title}</h3>
                   <p className="text-muted-foreground text-sm">{opt.desc}</p>
-                </motion.div>
+                </div>
               </AnimatedSection>
             ))}
           </div>
@@ -130,7 +127,17 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-foreground font-semibold mb-1">Email</h4>
-                    <p className="text-muted-foreground text-sm">hello@xypquantumai.com</p>
+                    <p className="text-muted-foreground text-sm">info@xypquantum.com</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="text-foreground font-semibold mb-1">Location</h4>
+                    <p className="text-muted-foreground text-sm">Bengaluru, Karnataka, India</p>
                   </div>
                 </div>
 
