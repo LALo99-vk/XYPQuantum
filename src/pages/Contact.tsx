@@ -15,7 +15,12 @@ import AnimatedSection from "@/components/AnimatedSection";
 import GlowOrb from "@/components/GlowOrb";
 import { useToast } from "@/hooks/use-toast";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+const API_URL =
+  import.meta.env.VITE_API_URL !== undefined && import.meta.env.VITE_API_URL !== ""
+    ? import.meta.env.VITE_API_URL
+    : import.meta.env.DEV
+      ? "http://localhost:3001"
+      : "";
 
 const contactOptions = [
   { icon: CalendarCheck, title: "Book a Demo", desc: "See ZYLOENS or our AI platforms in action" },

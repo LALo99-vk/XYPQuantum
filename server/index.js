@@ -3,11 +3,15 @@ import cors from "cors";
 import { google } from "googleapis";
 import dotenv from "dotenv";
 import { readFileSync } from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const isProduction = process.env.NODE_ENV === "production";
 
 // Middleware
 app.use(cors());
@@ -120,6 +124,15 @@ app.post("/api/contact", async (req, res) => {
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
+
+// ---------- Serve frontend (single service on Render) ----------
+if (isProduction) {
+  const distPath = path.join(__dirname, "..", "dist");
+  app.use(express.static(distPath));
+  app.get("*", (_req, res) => {
+    res.sendFile(path.join(distPath, "index.html"));
+  });
+}
 
 // ---------- Start ----------
 app.listen(PORT, () => {

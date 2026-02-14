@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Server secrets (do not commit)
+server/.env
+server/.env.example
+server/service-account-key.json
