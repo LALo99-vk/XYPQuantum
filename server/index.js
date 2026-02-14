@@ -11,7 +11,13 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const distPath = path.join(__dirname, "..", "dist");
+
+// Resolve dist: try cwd/dist first (when start is "node server/index.js" from repo root), then server/../dist
+const distFromCwd = path.resolve(process.cwd(), "dist");
+const distFromServer = path.resolve(__dirname, "..", "dist");
+const distPath = existsSync(path.join(distFromCwd, "index.html"))
+  ? distFromCwd
+  : distFromServer;
 const hasFrontendBuild = existsSync(path.join(distPath, "index.html"));
 
 // Middleware
@@ -128,13 +134,20 @@ app.get("/api/health", (_req, res) => {
 
 // ---------- Serve frontend when dist exists (e.g. on Render) ----------
 if (hasFrontendBuild) {
-  app.use(express.static(distPath));
+  app.use(
+    express.static(distPath, {
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith(".css")) res.setHeader("Content-Type", "text/css");
+        else if (filePath.endsWith(".js")) res.setHeader("Content-Type", "application/javascript");
+      },
+    })
+  );
   app.get("*", (_req, res) => {
     res.sendFile(path.join(distPath, "index.html"));
   });
   console.log("Serving frontend from", distPath);
 } else {
-  console.log("No frontend build found at", distPath, "(dist/index.html missing)");
+  console.log("No frontend build found. Tried:", distFromCwd, distFromServer);
 }
 
 // ---------- Start ----------
