@@ -194,11 +194,11 @@ const Contact = () => {
                   {sending ? (
                     <>
                       <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-                      Sending...
+                      Sending wait...
                     </>
                   ) : (
                     <>
-                      Send Message <ArrowRight className="ml-1 w-4 h-4" />
+                      Send Message asap <ArrowRight className="ml-1 w-4 h-4" />
                     </>
                   )}
                 </Button>
